@@ -16,6 +16,7 @@ public class TraverseTree {
         //层序遍历
         levelTraversal(root);
 
+
     }
 
     private static void levelTraversal(TreeNode root) {
