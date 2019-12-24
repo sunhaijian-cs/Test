@@ -30,7 +30,7 @@ public class Analysis {
             ,"kogake_prime_gauntlet"
             ,"tiberon_prime_barrel"
             ,"tiberon_prime_stock"
-//            ,"tiberon_prime_set"
+            ,"tiberon_prime_set"
             ,"zhuge_prime_barrel"
             ,"zephyr_prime_blueprint"
             ,"zephyr_prime_systems"
@@ -40,11 +40,52 @@ public class Analysis {
 
 
 
+    @Test
+    public void testuserdata(){
+        try {
+            printUserData("Miamouz");
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+    }
 
 
     @Test
-    public  void getAnalysisResult() throws Exception{
-        String goodsName="limbo_prime_neuroptics";
+    public  void getSingle() throws Exception{
+        GoodsItem commodityName= GoodsItem.limbo_prime_neuroptics;
+
+        getAnalysisResult(commodityName);
+
+    }
+
+    @Test
+    public  void getall() throws Exception{
+        GoodsItem [] goodsItemList=GoodsItem.values();
+
+        for (int i = 0; i <goodsItemList.length ; i++) {
+            getAnalysisResult( goodsItemList[i]);
+            System.out.println();
+            System.out.println("|||||||||||||||||||||||||||||||");
+            System.out.println();
+
+        }
+
+//        GoodsItem commodityName= GoodsItem.limbo_prime_neuroptics;
+
+
+
+    }
+
+
+
+
+
+
+//    @Test
+    public  void getAnalysisResult(GoodsItem commodityName) throws Exception{
+//        GoodsItem commodityName= GoodsItem.limbo_prime_neuroptics;
+
+
 //        String goodsName="chroma_prime_neuroptics";
 //        String goodsName="mesa_prime_neuroptics";
 //        String goodsName="stradavar_prime_blueprint";
@@ -57,7 +98,7 @@ public class Analysis {
 
 
 
-        String url="https://api.warframe.market/v1/items/"+goodsName+"/orders";
+        String url="https://api.warframe.market/v1/items/"+commodityName.getCommodityName()+"/orders";
 
 //        String url1="https://api.warframe.market/v1/profile/Lil-klemy/orders?include=profile";
 
@@ -85,7 +126,7 @@ public class Analysis {
                         ||"buy".equals(jsonObject1.getString("order_type"))){
                     continue;
                 }else{
-                    if(jsonObject1.getDouble("platinum")<11){
+                    if(jsonObject1.getDouble("platinum")<commodityName.getThreshhold()){
                         sortedMap .putAll(getUserData(userJson.getString("ingame_name")));
                     }else {
                         continue;
@@ -111,7 +152,7 @@ public class Analysis {
 
 
             sortedMap.forEach((it,it2)->{
-                System.out.println(it+"::::::"+it2);
+                System.out.println(it+"::::::"+it2.getName());
             });
 
 
@@ -119,24 +160,6 @@ public class Analysis {
     }
 
 
-@Test
-    public void testuserdata(){
-//    public void testuserdata(String userName,String goodsName,int price){
-
-        try {
-            printUserData("ademptia");
-
-//            String userName="111";
-////            String goodsName="111";
-////            int price=2;
-
-
-//            System.out.println("/w "+userName+" Hi! I want to buy: "+goodsName+" for "+price+" platinum. (warframe.market)");
-
-        }catch (Exception e ){
-            e.printStackTrace();
-        }
-    }
 
 
 
@@ -154,7 +177,6 @@ public class Analysis {
 
 
         HttpResponse httpResponse=httpclient.execute(httpGet);
-//        System.out.println(httpResponse.getEntity().getContent());
         HttpEntity entity=httpResponse.getEntity();
         TreeMap<Integer,OrderBean> sortedMap= new TreeMap();
 
@@ -169,20 +191,20 @@ public class Analysis {
 
                 String goodsName= jsonObject1.getJSONObject("item").getString("url_name");
                 String goodsEnName= jsonObject1.getJSONObject("item").getJSONObject("en").getString("item_name");
-
+                GoodsItem goodsItem=GoodsItem.getGoodsItem(goodsName);
 
                 for (int j = 0; j <goodsNameList.size() ; j++) {
                     if(goodsName.equals(goodsNameList.get(j))
-                            &&jsonObject1.getDouble("platinum")<=11){
+                            &&jsonObject1.getDouble("platinum")<=goodsItem.getThreshhold()){
 
-                        sum+= (15-jsonObject1.getDouble("platinum"))*jsonObject1.getInteger("quantity");
+
+
+                        sum+= (goodsItem.getReal()-jsonObject1.getDouble("platinum"))*jsonObject1.getInteger("quantity");
 
                     }else {
                         continue;
                     }
                 }
-
-
 
 //                System.out.println("商品："+goodsEnName);
 //                System.out.println("白金："+jsonObject1.getString("platinum"));
@@ -191,7 +213,6 @@ public class Analysis {
 
 
             }
-//            System.out.println(jsonArray.size());
 
         }
 
@@ -245,16 +266,16 @@ public class Analysis {
 
                 String goodsName= jsonObject1.getJSONObject("item").getString("url_name");
                 String goodsEnName= jsonObject1.getJSONObject("item").getJSONObject("en").getString("item_name");
-
+                GoodsItem goodsItem=GoodsItem.getGoodsItem(goodsName);
 
                 for (int j = 0; j <goodsNameList.size() ; j++) {
                     if(goodsName.equals(goodsNameList.get(j))
-                            &&jsonObject1.getDouble("platinum")<=11){
+                            &&jsonObject1.getDouble("platinum")<=goodsItem.getThreshhold()){
 
 //                        sum+= (15-jsonObject1.getDouble("platinum"))*jsonObject1.getInteger("quantity");
 
                         printinfo(userName,goodsEnName,jsonObject1.getDouble("platinum").intValue());
-                        System.out.println("数量："+jsonObject1.getInteger("quantity"));
+                        System.out.println("I want "+jsonObject1.getInteger("quantity"));
 
                     }else {
                         continue;
