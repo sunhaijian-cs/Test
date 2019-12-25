@@ -11,6 +11,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -61,6 +65,7 @@ public class Analysis {
     @Test
     public  void getall() throws Exception{
         GoodsItem [] goodsItemList=GoodsItem.values();
+        writeFile("start\n\r",false);
 
         for (int i = 0; i <goodsItemList.length ; i++) {
             getAnalysisResult( goodsItemList[i]);
@@ -69,11 +74,25 @@ public class Analysis {
             System.out.println();
 
         }
+    }
 
-//        GoodsItem commodityName= GoodsItem.limbo_prime_neuroptics;
-
-
-
+//    @Test
+    public void writeFile(String content,boolean append){
+        String fileName ="test.txt";
+        File file = null;
+        FileWriter fw = null;
+        try {
+            file = new File("./"+fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            fw = new FileWriter(file,append);
+            fw.write(content);
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -136,7 +155,7 @@ public class Analysis {
 
 
 
-                    System.out.println(userJson.getString("status"));
+//                    System.out.println(userJson.getString("status"));
                 }
 
 //                System.out.println("白金："+jsonObject1.getString("platinum"));
@@ -150,7 +169,7 @@ public class Analysis {
 
             }
 
-
+            System.out.println(commodityName);
             sortedMap.forEach((it,it2)->{
                 System.out.println(it+"::::::"+it2.getName());
             });
@@ -186,6 +205,8 @@ public class Analysis {
             JSONObject jsonObject=JSON.parseObject(result);
             JSONArray jsonArray= jsonObject.getJSONObject("payload").getJSONArray("sell_orders");
 
+
+
             for (int i = 0; i <jsonArray.size() ; i++) {
                 JSONObject jsonObject1=jsonArray.getJSONObject(i);
 
@@ -214,11 +235,46 @@ public class Analysis {
 
             }
 
+            if(sum>=10){
+                for (int i = 0; i <jsonArray.size() ; i++) {
+                    JSONObject jsonObject1=jsonArray.getJSONObject(i);
+
+                    String goodsName= jsonObject1.getJSONObject("item").getString("url_name");
+                    String goodsEnName= jsonObject1.getJSONObject("item").getJSONObject("en").getString("item_name");
+                    GoodsItem goodsItem=GoodsItem.getGoodsItem(goodsName);
+
+                    for (int j = 0; j <goodsNameList.size() ; j++) {
+                        if(goodsName.equals(goodsNameList.get(j))
+                                &&jsonObject1.getDouble("platinum")<=goodsItem.getThreshhold()){
+                            System.out.println();
+                            printinfo(userName,goodsEnName,jsonObject1.getDouble("platinum").intValue());
+                            System.out.println("I want "+jsonObject1.getInteger("quantity"));
+                            writeFile("I want "+jsonObject1.getInteger("quantity")+"\n",true);
+
+
+
+    //                        sum+= (goodsItem.getReal()-jsonObject1.getDouble("platinum"))*jsonObject1.getInteger("quantity");
+
+                        }else {
+                            continue;
+                        }
+                    }
+
+                }
+
+                writeFile("用户名 ："+userName+"\n",true);
+                writeFile("收益 ："+sum+"\n",true);
+                writeFile("-----------------------------------\n",true);
+
+
+                System.out.println("用户名 ："+userName);
+                System.out.println("收益 ："+sum);
+                System.out.println("-----------------------------------");
+
+            }
         }
 
-        System.out.println("用户名 ："+userName);
-        System.out.println("收益 ："+sum);
-        System.out.println("-----------------------------------");
+
 
 
         OrderBean orderBean=new OrderBean();
@@ -314,6 +370,7 @@ public class Analysis {
 
             System.out.println("/w "+userName+" Hi! I want to buy: "+goodsName+" for "+price+" platinum. (warframe.market)");
 
+        writeFile("/w "+userName+" Hi! I want to buy: "+goodsName+" for "+price+" platinum. (warframe.market)"+"\n",true);
     }
 
 }
