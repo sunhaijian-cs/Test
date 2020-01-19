@@ -13,6 +13,9 @@ public enum GoodsItem {
     limbo_prime_neuroptics("limbo_prime_neuroptics",11,15),
     chroma_prime_neuroptics("chroma_prime_neuroptics",11,15),
     mesa_prime_neuroptics("mesa_prime_neuroptics",11,15),
+    dethcube_prime_blueprint("dethcube_prime_blueprint",11,15),
+    wukong_prime_blueprint("wukong_prime_blueprint",11,15),
+    pyrana_prime_blueprint("pyrana_prime_blueprint",11,15),
     stradavar_prime_blueprint("stradavar_prime_blueprint",11,15),
     kogake_prime_gauntlet("kogake_prime_gauntlet",11,15),
     tiberon_prime_barrel("tiberon_prime_barrel",11,15),
@@ -20,7 +23,9 @@ public enum GoodsItem {
     zhuge_prime_barrel("zhuge_prime_barrel",11,15),
     zephyr_prime_blueprint("zephyr_prime_blueprint",11,15),
     zephyr_prime_systems("zephyr_prime_systems",11,15),
-    tiberon_prime_set("tiberon_prime_set",24,34);
+    akstiletto_prime_blueprint("akstiletto_prime_blueprint",11,15),
+    pyrana_prime_set("pyrana_prime_set",14,19),
+    tiberon_prime_set("tiberon_prime_set",25,34);
 
 
 
@@ -46,6 +51,12 @@ public enum GoodsItem {
                 return GoodsItem.chroma_prime_neuroptics;
             case "mesa_prime_neuroptics":
                 return GoodsItem.mesa_prime_neuroptics;
+            case "dethcube_prime_blueprint":
+                return GoodsItem.dethcube_prime_blueprint;
+            case "wukong_prime_blueprint":
+                return GoodsItem.wukong_prime_blueprint;
+            case "pyrana_prime_blueprint":
+                return GoodsItem.pyrana_prime_blueprint;
             case "stradavar_prime_blueprint":
                 return GoodsItem.stradavar_prime_blueprint;
             case "kogake_prime_gauntlet":
@@ -62,6 +73,10 @@ public enum GoodsItem {
                 return GoodsItem.zephyr_prime_systems;
             case "tiberon_prime_set":
                 return GoodsItem.tiberon_prime_set;
+            case "pyrana_prime_set":
+                return GoodsItem.pyrana_prime_set;
+            case "akstiletto_prime_blueprint":
+                return GoodsItem.akstiletto_prime_blueprint;
 
             default:
                 return null;

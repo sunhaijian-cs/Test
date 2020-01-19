@@ -30,16 +30,23 @@ public class Analysis {
             "limbo_prime_neuroptics"
             ,"chroma_prime_neuroptics"
             ,"mesa_prime_neuroptics"
+            ,"dethcube_prime_blueprint"
+            ,"wukong_prime_blueprint"
+            ,"pyrana_prime_blueprint"
             ,"stradavar_prime_blueprint"
             ,"kogake_prime_gauntlet"
             ,"tiberon_prime_barrel"
             ,"tiberon_prime_stock"
-            ,"tiberon_prime_set"
             ,"zhuge_prime_barrel"
             ,"zephyr_prime_blueprint"
             ,"zephyr_prime_systems"
+            ,"tiberon_prime_set"
+            ,"pyrana_prime_set"
+            ,"akstiletto_prime_blueprint"
 
     ));
+
+    Set<String> allName=new HashSet();
 
 
 
@@ -146,6 +153,9 @@ public class Analysis {
                     continue;
                 }else{
                     if(jsonObject1.getDouble("platinum")<commodityName.getThreshhold()){
+                        if(allName.contains(userJson.getString("ingame_name"))){
+                            continue;
+                        }
                         sortedMap .putAll(getUserData(userJson.getString("ingame_name")));
                     }else {
                         continue;
@@ -214,23 +224,24 @@ public class Analysis {
                 String goodsEnName= jsonObject1.getJSONObject("item").getJSONObject("en").getString("item_name");
                 GoodsItem goodsItem=GoodsItem.getGoodsItem(goodsName);
 
+
                 for (int j = 0; j <goodsNameList.size() ; j++) {
-                    if(goodsName.equals(goodsNameList.get(j))
-                            &&jsonObject1.getDouble("platinum")<=goodsItem.getThreshhold()){
+
+                    try {
+                        if (goodsName.equals(goodsNameList.get(j))
+                                && jsonObject1.getDouble("platinum") <= goodsItem.getThreshhold()) {
 
 
+                            sum += (goodsItem.getReal() - jsonObject1.getDouble("platinum")) * jsonObject1.getInteger("quantity");
 
-                        sum+= (goodsItem.getReal()-jsonObject1.getDouble("platinum"))*jsonObject1.getInteger("quantity");
-
-                    }else {
-                        continue;
+                        } else {
+                            continue;
+                        }
+                    }catch(Exception e){
+                        System.out.println(1);
+                        e.printStackTrace();
                     }
                 }
-
-//                System.out.println("商品："+goodsEnName);
-//                System.out.println("白金："+jsonObject1.getString("platinum"));
-//                System.out.println("数量："+jsonObject1.getString("quantity"));
-//                System.out.println("-----------------------------------");
 
 
             }
@@ -250,6 +261,8 @@ public class Analysis {
                             printinfo(userName,goodsEnName,jsonObject1.getDouble("platinum").intValue());
                             System.out.println("I want "+jsonObject1.getInteger("quantity"));
                             writeFile("I want "+jsonObject1.getInteger("quantity")+"\n",true);
+
+                            allName.add(userName);
 
 
 
