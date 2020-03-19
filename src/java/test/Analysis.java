@@ -49,6 +49,19 @@ public class Analysis {
     Set<String> allName=new HashSet();
 
 
+    public static void main(String[] args) {
+
+        try {
+
+            Analysis analysis=new Analysis();
+            analysis.getall();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 
     @Test
