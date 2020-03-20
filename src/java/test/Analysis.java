@@ -26,25 +26,7 @@ public class Analysis {
 
     RequestConfig config = RequestConfig.custom().setConnectTimeout(50000).setSocketTimeout(30000).build();
 
-    List<String> goodsNameList=new ArrayList(Arrays.asList(
-            "limbo_prime_neuroptics"
-            ,"chroma_prime_neuroptics"
-            ,"mesa_prime_neuroptics"
-            ,"dethcube_prime_blueprint"
-            ,"wukong_prime_blueprint"
-            ,"pyrana_prime_blueprint"
-            ,"stradavar_prime_blueprint"
-            ,"kogake_prime_gauntlet"
-            ,"tiberon_prime_barrel"
-            ,"tiberon_prime_stock"
-            ,"zhuge_prime_barrel"
-            ,"zephyr_prime_blueprint"
-            ,"zephyr_prime_systems"
-            ,"tiberon_prime_set"
-            ,"pyrana_prime_set"
-            ,"akstiletto_prime_blueprint"
-
-    ));
+    static List<String> goodsNameList=GoodsItem.getNameList();
 
     Set<String> allName=new HashSet();
 
