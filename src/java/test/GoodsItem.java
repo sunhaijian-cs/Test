@@ -36,9 +36,17 @@ public enum GoodsItem {
     ;
 
 
-
+    /**
+     * 商品名称
+     */
     private String commodityName;
+    /**
+     * 阈值，超过这个值不做计算
+     */
     private int threshhold;
+    /**
+     * 实际价值
+     */
     private int real;
 
     GoodsItem(String commodityName, int threshhold,int real) {

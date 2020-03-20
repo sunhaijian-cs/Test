@@ -104,18 +104,6 @@ public class Analysis {
 
 //    @Test
     public  void getAnalysisResult(GoodsItem commodityName) throws Exception{
-//        GoodsItem commodityName= GoodsItem.limbo_prime_neuroptics;
-
-
-//        String goodsName="chroma_prime_neuroptics";
-//        String goodsName="mesa_prime_neuroptics";
-//        String goodsName="stradavar_prime_blueprint";
-//        String goodsName="kogake_prime_gauntlet";
-//        String goodsName="tiberon_prime_barrel";
-//        String goodsName="tiberon_prime_stock";
-//        String goodsName="zhuge_prime_barrel";
-//        String goodsName="zephyr_prime_blueprint";
-//        String goodsName="zephyr_prime_systems";
 
 
 
@@ -155,23 +143,7 @@ public class Analysis {
                     }else {
                         continue;
                     }
-
-
-
-
-
-//                    System.out.println(userJson.getString("status"));
                 }
-
-//                System.out.println("白金："+jsonObject1.getString("platinum"));
-//                System.out.println("数量："+jsonObject1.getString("quantity"));
-//                System.out.println("-----------------------------------");
-//                OrderBean orderBean=new OrderBean();
-//                orderBean.setName(userJson.getString("ingame_name"));
-//                orderBean.setPrice(jsonObject1.getDouble("platinum"));
-//                orderBean.setSum(jsonObject1.getInteger("quantity"));
-//                sortedMap.put(jsonObject1.getDouble("platinum"),orderBean);
-
             }
 
             System.out.println(commodityName);
@@ -221,11 +193,9 @@ public class Analysis {
 
 
                 for (int j = 0; j <goodsNameList.size() ; j++) {
-
                     try {
                         if (goodsName.equals(goodsNameList.get(j))
                                 && jsonObject1.getDouble("platinum") <= goodsItem.getThreshhold()) {
-
 
                             sum += (goodsItem.getReal() - jsonObject1.getDouble("platinum")) * jsonObject1.getInteger("quantity");
 
@@ -237,8 +207,6 @@ public class Analysis {
                         e.printStackTrace();
                     }
                 }
-
-
             }
 
             if(sum>=10){
@@ -258,8 +226,6 @@ public class Analysis {
                             writeFile("I want "+jsonObject1.getInteger("quantity")+"\n",true);
 
                             allName.add(userName);
-
-
 
     //                        sum+= (goodsItem.getReal()-jsonObject1.getDouble("platinum"))*jsonObject1.getInteger("quantity");
 
