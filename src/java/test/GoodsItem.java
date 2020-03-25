@@ -20,12 +20,20 @@ public enum GoodsItem {
     wukong_prime_blueprint("wukong_prime_blueprint",11,15),
     pyrana_prime_blueprint("pyrana_prime_blueprint",11,15),
     stradavar_prime_blueprint("stradavar_prime_blueprint",11,15),
+
     kogake_prime_gauntlet("kogake_prime_gauntlet",11,15),
     tiberon_prime_barrel("tiberon_prime_barrel",11,15),
     tiberon_prime_stock("tiberon_prime_stock",11,15),
     zhuge_prime_barrel("zhuge_prime_barrel",11,15),
-    zephyr_prime_blueprint("zephyr_prime_blueprint",11,15),
-    zephyr_prime_systems("zephyr_prime_systems",11,15),
+    oberon_prime_neuroptics("oberon_prime_neuroptics",11,15),
+    ballistica_prime_blueprint("ballistica_prime_blueprint",11,15),
+    sybaris_prime_barrel("sybaris_prime_barrel",11,15),
+    gram_prime_handle("gram_prime_handle",11,15),
+    dethcube_prime_cerebrum("dethcube_prime_cerebrum",11,15),
+    tigris_prime_blueprint("tigris_prime_blueprint",11,15),
+    baza_prime_blueprint("baza_prime_blueprint",11,15),
+    akjagara_prime_barrel("akjagara_prime_barrel",11,15),
+    ninkondi_prime_handle("ninkondi_prime_handle",11,15),
     akstiletto_prime_blueprint("akstiletto_prime_blueprint",11,15)
 
 
