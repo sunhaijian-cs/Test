@@ -132,7 +132,8 @@ public class Analysis {
                 JSONObject userJson=jsonObject1.getJSONObject("user");
                 if("offline".equals(userJson.getString("status"))
                         ||"online".equals(userJson.getString("status"))
-                        ||"buy".equals(jsonObject1.getString("order_type"))){
+                        ||"buy".equals(jsonObject1.getString("order_type"))
+                        ||!"en".equals(jsonObject1.getString("region"))){
                     continue;
                 }else{
                     if(jsonObject1.getDouble("platinum")<commodityName.getThreshhold()){
