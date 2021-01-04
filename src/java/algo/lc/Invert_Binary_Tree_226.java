@@ -1,5 +1,6 @@
-package algo.other.tree;
+package algo.lc;
 
+import algo.other.tree.TreeNode;
 import com.alibaba.fastjson.JSON;
 
 import java.util.Objects;
@@ -32,12 +33,12 @@ import java.util.Objects;
 
  https://zhuanlan.zhihu.com/p/76818774
  **/
-public class InvertBinaryTree {
+public class Invert_Binary_Tree_226 {
 
 
     public static void main(String[] args) {
 
-        TreeNode root=new TreeNode().generateTree();
+        TreeNode root=TreeNode.generateTree();
 
         //层序遍历
         invertBinaryTree(root);
@@ -51,12 +52,12 @@ public class InvertBinaryTree {
         if(Objects.isNull(root)){
             return ;
         }
-        TreeNode temp=root.treeNodeLeft;
-        root.treeNodeLeft=root.treeNodeRight;
-        root.treeNodeRight=temp;
+        TreeNode temp=root.left;
+        root.left=root.right;
+        root.right=temp;
 
-        invertBinaryTree(root.treeNodeLeft);
-        invertBinaryTree(root.treeNodeRight);
+        invertBinaryTree(root.left);
+        invertBinaryTree(root.right);
         return ;
     }
 

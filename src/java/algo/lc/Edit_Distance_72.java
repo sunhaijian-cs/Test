@@ -23,7 +23,7 @@ horse -> rorse (将 'h' 替换为 'r')
 rorse -> rose (删除 'r')
 rose -> ros (删除 'e')
  **/
-public class editDistance {
+public class Edit_Distance_72 {
 
 
     public static void main(String[] args) {

@@ -1,5 +1,8 @@
 package algo.other.tree;
 
+import algo.lc.datastructure.binaryheap.Max_Priority_Queue;
+
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -31,9 +34,12 @@ public class DiameterOfBinaryTree {
 
 
     public static void main(String[] args) {
+        List list=new ArrayList();
+//       Queue
 
 
-        TreeNode treeNode=new TreeNode().generateTree();
+
+        TreeNode treeNode=TreeNode.generateTree();
         System.out.println(diameterOfBinaryTree(treeNode));;
 
 
@@ -48,8 +54,8 @@ public class DiameterOfBinaryTree {
     private static int find(TreeNode node, AtomicReference<Integer> result) {
         if (node == null) return 0;
         int left = 0, right = 0;
-        if (node.treeNodeLeft != null) left = find(node.treeNodeLeft,result) + 1;
-        if (node.treeNodeRight != null) right = find(node.treeNodeRight,result) + 1;
+        if (node.left != null) left = find(node.left,result) + 1;
+        if (node.right != null) right = find(node.right,result) + 1;
         int tmp = Math.max(result.get(), left + right);
         result.set(tmp);
         return Math.max(left, right);
